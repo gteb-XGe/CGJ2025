@@ -89,7 +89,7 @@ public class CRT_trigger : MonoBehaviour, IAttachable
 
     private void OnMouseDown()//鼠标点击事件
     {
-        SwitchToNewScene("S2");
+        SwitchToNewScene("First Scene");
         isMouse = true;
         StartCoroutine(CRTFlashEffect());
         _教程引导Text();
@@ -117,10 +117,6 @@ public class CRT_trigger : MonoBehaviour, IAttachable
         r.OnComplete(() => Destroy(_教程引导.gameObject));
     }
 
-    public void S2()
-    {
-        SceneManager.LoadScene("S2");//加载S2场景
-    }
 
     public void SwitchToNewScene(string sceneName)
     {
