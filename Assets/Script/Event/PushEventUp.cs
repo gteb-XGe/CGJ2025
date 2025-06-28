@@ -10,12 +10,18 @@ public class PushEventUp :  MonoBehaviour ,BaseEvent
     public float maxForce = 5f;     // 最近距离时的最大风力
     public float maxDistance = 5f;  // 风扇的最大作用距离
     private bool isFanActive = false; // 风扇开关状态
+    private const string FanSoundPath = "Audio/Level1/Level_01_SmallFan";
     public void StartEvent(GameObject player)
     {
         targetObject = player;
         isFanActive = !isFanActive;
-        Debug.Log("111");
-      
+        if (isFanActive)
+        {
+        
+            MusicManager.Instance.PlaySFX(FanSoundPath,0.2f);
+        }
+        // Debug.Log("111");
+
     }
     public void EndEvent(GameObject player)
     {
