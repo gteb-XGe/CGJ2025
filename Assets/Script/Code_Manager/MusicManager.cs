@@ -3,11 +3,11 @@ using Manager;
 using System.Collections.Generic;
 public class MusicManager : _Manager<MusicManager>
 {
-    [SerializeField] private AudioSource musicSource;  // Ö÷±³¾°ÒôÀÖ
+    [SerializeField] private AudioSource musicSource;  // èƒŒæ™¯éŸ³ä¹æº
     private Dictionary<string, AudioSource> audioSources = new Dictionary<string, AudioSource>();
     private Dictionary<string, AudioClip> audioClips = new Dictionary<string, AudioClip>();
 
-    //ÒôÆµÂ·¾¶ÎÄ¼şÎª public const string BGM_MAIN = "Audio/Music/bgm_main";ĞÎÊ½
+    //éŸ³é¢‘è·¯å¾„æ–‡ä»¶ä¸º public const string BGM_MAIN = "Audio/Music/bgm_main";æ ¼å¼
 
     private void Awake()
     {
@@ -29,12 +29,12 @@ public class MusicManager : _Manager<MusicManager>
 
     }
 
-    public AudioClip LoadAudio(string path)//¼ÓÔØÒôÆµ
+    public AudioClip LoadAudio(string path)//åŠ è½½éŸ³é¢‘
     {
         return (AudioClip)Resources.Load(path);
     }
 
-    public AudioClip GetAudio(string path)//»ñÈ¡ÒôÆµ²¢»º´æ,±ÜÃâÖØ¸´¼ÓÔØ
+    public AudioClip GetAudio(string path)//è·å–éŸ³é¢‘èµ„æºï¼Œé¿å…é‡å¤åŠ è½½
     {
         if (!audioClips.ContainsKey(path))
         {
@@ -43,7 +43,7 @@ public class MusicManager : _Manager<MusicManager>
         return audioClips[path];
     }
 
-    public void PlayMainMusic(string path, float volume = 1.0f, bool loop = true)//²¥·ÅÖ÷ÒôÀÖ
+    public void PlayMainMusic(string path, float volume = 1.0f, bool loop = true)//æ’­æ”¾èƒŒæ™¯éŸ³ä¹
     {
         AudioClip clip = GetAudio(path);
         if (clip == null) return;
@@ -64,13 +64,13 @@ public class MusicManager : _Manager<MusicManager>
         musicSource.volume = volume;
     }
 
-    public void PlaySFX(string path, float volume = 1.0f)//playoneshot¿ÉÒÔµş¼Ó²¥·Å,ÓÃÓÚ²¥·ÅÎïÌå½»»¥µÈÒôĞ§
+    public void PlaySFX(string path, float volume = 1.0f)//playoneshotå¯ä»¥å åŠ æ’­æ”¾ï¼Œç”¨äºéŸ³æ•ˆäº¤å‰æ··åˆæ•ˆæœ
     {
         this.musicSource.PlayOneShot(GetAudio(path), volume);
     }
 
 
-    public AudioSource GetAudioSource(string name, bool loop = true)// ´´½¨²¢»ñÈ¡Ö¸¶¨Ãû³ÆµÄAudioSource
+    public AudioSource GetAudioSource(string name, bool loop = true)// åŠ¨æ€è·å–æŒ‡å®šåç§°çš„AudioSource
     {
         if (!audioSources.TryGetValue(name, out AudioSource source))
         {
@@ -83,7 +83,7 @@ public class MusicManager : _Manager<MusicManager>
         return source;
     }
 
-    public void PlayAudio(string name, string path, float volume = 1.0f, bool loop = true)// ²¥·Å¶ÀÁ¢¿ØÖÆµÄÒôÆµ
+    public void PlayAudio(string name, string path, float volume = 1.0f, bool loop = true)// æ’­æ”¾ç‹¬ç«‹å‘½åçš„éŸ³é¢‘
     {
         AudioClip clip = GetAudio(path);
         if (clip == null) return;
@@ -96,7 +96,7 @@ public class MusicManager : _Manager<MusicManager>
     }
 
 
-    public void StopAudio(string name)// Í£Ö¹Ö¸¶¨ÒôÆµ
+    public void StopAudio(string name)// åœæ­¢æŒ‡å®šéŸ³é¢‘
     {
         if (audioSources.TryGetValue(name, out AudioSource source))
         {
@@ -104,7 +104,7 @@ public class MusicManager : _Manager<MusicManager>
         }
     }
 
-    public void SetAudioVolume(string name, float valume = 0f)//Ö¸¶¨ÒôÆµµÄÒôÁ¿
+    public void SetAudioVolume(string name, float valume = 0f)//è®¾ç½®æŒ‡å®šéŸ³é¢‘éŸ³é‡
     {
         if (audioSources.TryGetValue(name, out AudioSource source))
         {
@@ -112,24 +112,24 @@ public class MusicManager : _Manager<MusicManager>
         }
     }
 
-    public void RemoveAudioSource(string name)//É¾³ı²»ĞèÒªµÄÒôÆµ
+    public void RemoveAudioSource(string name)//åˆ é™¤ä¸å†éœ€è¦çš„éŸ³é¢‘
     {
         if (audioSources.TryGetValue(name, out AudioSource source))
         {
-            source.Stop(); // Í£Ö¹²¥·Å
-            Destroy(source.gameObject); // Ïú»ÙÓÎÏ·¶ÔÏó
-            audioSources.Remove(name); // ´Ó×ÖµäÖĞÒÆ³ı
+            source.Stop(); // åœæ­¢æ’­æ”¾
+            Destroy(source.gameObject); // é”€æ¯æ¸¸æˆå¯¹è±¡
+            audioSources.Remove(name); // ä»å­—å…¸ä¸­ç§»é™¤
         }
     }
 
-    // ÇåÀíËùÓĞ¿ÉÒÆ³ıµÄÒôÆµÔ´
-    public void CleanupAudioSources(List<string> exceptions = null)//exceptionsÎªĞèÒªµÄÒôÆµ
+    // æ¸…ç†æ‰€æœ‰éä¿ç•™éŸ³é¢‘æº
+    public void CleanupAudioSources(List<string> exceptions = null)//exceptionsä¸ºéœ€è¦ä¿ç•™çš„éŸ³é¢‘
     {
         List<string> sourcesToRemove = new List<string>();
 
         foreach (var pair in audioSources)
         {
-            // Ìø¹ıÀıÍâÁĞ±íÖĞµÄÒôÆµ
+            // ä¿ç•™ä¾‹å¤–åˆ—è¡¨ä¸­çš„éŸ³é¢‘
             if (exceptions != null && exceptions.Contains(pair.Key))
                 continue;
 
