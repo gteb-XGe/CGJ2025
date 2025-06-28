@@ -124,7 +124,7 @@ public class CRT_trigger : MonoBehaviour, IAttachable
         CameraShake();
         r.Append(img.DOFade(1, fadeInDuration));
         r.AppendInterval(switchDelay);
-        r.OnComplete(() => Invoke(nameof(name), switchDelay));
+        r.OnComplete(() =>SceneManager.LoadScene(name));
         Camera newCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
     }
 
