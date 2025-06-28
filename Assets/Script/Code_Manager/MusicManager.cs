@@ -7,10 +7,6 @@ public class MusicManager : _Manager<MusicManager>
     private Dictionary<string, AudioSource> audioSources = new Dictionary<string, AudioSource>();
     private Dictionary<string, AudioClip> audioClips = new Dictionary<string, AudioClip>();
 
-    [Header("音频文件")]
-    public const string BGM_Start = "Audio/Test/1";
-    public const string BGM_Main = "Audio/Test/2";
-    public const string BGM_MainLoop = "Audio/Test/3 loop";
     //音频路径文件为 public const string BGM_MAIN = "Audio/Music/bgm_main";格式
 
     private void Awake()
@@ -74,7 +70,7 @@ public class MusicManager : _Manager<MusicManager>
     }
 
 
-    public AudioSource GetAudioSource(string name, bool loop = true)// 动态获取指定名称的AudioSource
+    public AudioSource GetAudioSource(string name,bool loop = true)// 动态获取指定名称的AudioSource
     {
         if (!audioSources.TryGetValue(name, out AudioSource source))
         {
