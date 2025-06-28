@@ -122,13 +122,13 @@ public class CRT_trigger : MonoBehaviour, IAttachable
         SceneManager.LoadScene("S2");//¼ÓÔØS2³¡¾°
     }
 
-    public void SwitchToNewScene(string name)
+    public void SwitchToNewScene(string sceneName)
     {
         var r = DOTween.Sequence();
         CameraShake();
         r.Append(img.DOFade(1, fadeInDuration));
         r.AppendInterval(switchDelay);
-        r.OnComplete(() => Invoke(nameof(name), switchDelay));
+        r.OnComplete(() => SceneManager.LoadScene(sceneName));
         Camera newCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
     }
 
