@@ -30,7 +30,7 @@ public class CRT_trigger : MonoBehaviour, IAttachable
     [SerializeField] float fadeOutDuration = 3f;
     [SerializeField] float switchDelay = 0.5f;
     [SerializeField] private float fadeInDuration = 2f;
-    Image img;
+    public Image img;
 
     [Header("镜头抖动参数")]
     [SerializeField] private float shakeDuration = 0.3f;
@@ -56,7 +56,6 @@ public class CRT_trigger : MonoBehaviour, IAttachable
     private void Awake()
     {
         timer = triggerTime;
-        img.GetComponent<Image>();
     }
 
     void Start()
@@ -91,6 +90,7 @@ public class CRT_trigger : MonoBehaviour, IAttachable
 
     private void OnMouseDown()//鼠标点击事件
     {
+        SwitchToNewScene();
         isMouse = true;
         StartCoroutine(CRTFlashEffect());
         _教程引导Text();
