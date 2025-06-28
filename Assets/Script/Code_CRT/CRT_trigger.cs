@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using UnityEngine.SceneManagement;
 
 public interface IAttachable
 {
@@ -25,6 +25,12 @@ public class CRT_trigger : MonoBehaviour,IAttachable
     bool isMouse = false;
     [SerializeField] int FlashNum = 3; //闪烁次数
     [SerializeField] private GameObject LightningEffectPrefab; //闪电特效Prefab
+
+    [Header("场景切换参数")]
+    // 光圈收缩动画时长，可根据需求调整
+    [SerializeField] float fadeOutDuration =3f;
+    // 场景切换延迟，可用于配合动画
+    [SerializeField] float switchDelay = 0.5f;
 
     public void OnAttach()
     {
@@ -105,6 +111,29 @@ public class CRT_trigger : MonoBehaviour,IAttachable
         r.Append(_教程引导.DOFade(1, FadeTime));
         r.Append(_教程引导.DOFade(0, FadeTime * 2));//淡入淡出效果
         r.OnComplete(() => Destroy(_教程引导.gameObject));
+    }
+
+    public void S2()
+    {
+        SceneManager.LoadScene("S2");//加载S2场景
+    }
+
+    public void SwitchToNewScene()
+    {
+        // 禁用玩家控制
+        //隐藏Player?
+
+
+        //屏幕变黑后切换
+        Camera.main.DOColor(Color.black, fadeOutDuration).OnComplete(() =>
+        {
+            // 延迟一段时间后切换场景
+            Invoke("LoadTargetScene", switchDelay);
+        });
+
+        Camera newCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+
+        S2();
     }
 
 }
