@@ -20,8 +20,8 @@ public class CRT_trigger : MonoBehaviour,IAttachable
     [SerializeField]private float FadeTime=1.0f;
 
     [Header("交互参数")]
-    private float timer;
     [SerializeField] private float triggerTime = 3.0f; // 触发时间阈值
+    private float timer;
     bool isMouse = false;
     [SerializeField] int FlashNum = 3; //闪烁次数
     [SerializeField] private GameObject LightningEffectPrefab; //闪电特效Prefab
@@ -74,6 +74,7 @@ public class CRT_trigger : MonoBehaviour,IAttachable
         {
             Instantiate(LightningEffectPrefab, transform.position, Quaternion.identity);
         }
+        Destroy(LightningEffectPrefab,0.3f);
     }
 
     private void OnMouseDown()//鼠标点击事件
