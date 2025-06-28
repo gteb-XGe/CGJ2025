@@ -22,12 +22,11 @@ public class CRT_trigger : MonoBehaviour, IAttachable
     [Header("交互参数")]
     [SerializeField] private float triggerTime = 3.0f; // 触发时间阈值
     private float timer;
-    bool isMouse = false;
+    private bool isMouse = false;
     [SerializeField] int FlashNum = 3; //闪烁次数
     [SerializeField] private GameObject LightningEffectPrefab; //闪电特效Prefab
 
     [Header("场景切换参数")]
-    [SerializeField] float fadeOutDuration = 3f;
     [SerializeField] float switchDelay = 0.5f;
     [SerializeField] private float fadeInDuration = 2f;
     public Image img;
@@ -90,7 +89,7 @@ public class CRT_trigger : MonoBehaviour, IAttachable
 
     private void OnMouseDown()//鼠标点击事件
     {
-        SwitchToNewScene();
+        SwitchToNewScene("S2");
         isMouse = true;
         StartCoroutine(CRTFlashEffect());
         _教程引导Text();
@@ -123,13 +122,13 @@ public class CRT_trigger : MonoBehaviour, IAttachable
         SceneManager.LoadScene("S2");//加载S2场景
     }
 
-    public void SwitchToNewScene()
+    public void SwitchToNewScene(string name)
     {
         var r = DOTween.Sequence();
         CameraShake();
         r.Append(img.DOFade(1, fadeInDuration));
         r.AppendInterval(switchDelay);
-        r.OnComplete(() => Invoke(nameof(S2), switchDelay));
+        r.OnComplete(() => Invoke(nameof(name), switchDelay));
         Camera newCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
     }
 
