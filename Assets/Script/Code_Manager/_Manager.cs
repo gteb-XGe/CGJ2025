@@ -1,75 +1,75 @@
 using UnityEngine;
 
 namespace Manager
-
-{// ·ºĞÍµ¥Àı¹ÜÀíÆ÷Àà£¬¼Ì³Ğ×Ô MonoBehaviour
+{
+    // å•ä¾‹æ¨¡å¼ç®¡ç†åŸºç±»ï¼Œç»§æ‰¿è‡ª MonoBehaviour
     public class _Manager<T> : MonoBehaviour where T : MonoBehaviour
     {
-        // µ¥ÀıÊµÀı
+        // å•ä¾‹å®ä¾‹
         public static T Instance
         {
             get
             {
-                // ÈôÊµÀıÎª¿Õ£¬ÔÚ³¡¾°ÖĞ²éÕÒ
+                // å¦‚æœå®ä¾‹ä¸ºç©ºï¼Œåœ¨åœºæ™¯ä¸­æŸ¥æ‰¾
                 if (_instance == null)
                 {
                     _instance = Object.FindAnyObjectByType<T>();
-                    // Èô³¡¾°ÖĞÎ´ÕÒµ½ÊµÀı
-                    if (_instance == null)
-                    {
-                        Debug.Log($"µ¥ÀıÄ£Ê½ {typeof(T).Name} ³¡¾°ÖĞ²»´æÔÚ£¬³¢ÊÔ´´½¨...");
+                    // å¦‚æœåœºæ™¯ä¸­æœªæ‰¾åˆ°å®ä¾‹
+            if (_instance == null)
+            {
+                        Debug.Log($"å•ä¾‹æ¨¡å¼ {typeof(T).Name} åœ¨åœºæ™¯ä¸­ä¸å­˜åœ¨ï¼Œå°è¯•åˆ›å»º...");
 
-                        // ²éÕÒ´øÓĞ "Manager" ±êÇ©µÄÓÎÏ·¶ÔÏó
+                        // æŸ¥æ‰¾å¸¦æœ‰"Manager"æ ‡ç­¾çš„æ¸¸æˆå¯¹è±¡
                         GameObject target = GameObject.FindGameObjectWithTag("Manager");
                         Debug.Log(target.name);
                         if (target == null)
                         {
-                            // ÈôÎ´ÕÒµ½£¬´´½¨Ò»¸öĞÂµÄÓÎÏ·¶ÔÏó
+                            // å¦‚æœæœªæ‰¾åˆ°åˆ™åˆ›å»ºä¸€ä¸ªæ–°çš„æ¸¸æˆå¯¹è±¡
                             target = new GameObject();
-                            target.name = $"µ¥ÀıÄ£Ê½¹ÜÀíÆ÷ {typeof(T).Name}";
-                            Debug.Log("´´½¨");
-                        }
+                            target.name = $"å•ä¾‹æ¨¡å¼ç®¡ç†å™¨ {typeof(T).Name}";
+                            Debug.Log("åˆ›å»º");
+            }
                         try
-                        {
-                            // ³¢ÊÔÔÚÄ¿±êÓÎÏ·¶ÔÏóÉÏÌí¼Ó×é¼ş
+            {
+                            // åœ¨ç›®æ ‡æ¸¸æˆå¯¹è±¡ä¸Šæ·»åŠ ç»„ä»¶
                             _instance = target.AddComponent<T>();
                         }
                         catch (System.Exception e)
-                        {
-                            // ´¦ÀíÌí¼Ó×é¼şÊ§°ÜµÄÇé¿ö
-                            Debug.LogError($"´´½¨µ¥Àı {typeof(T).Name} Ê§°Ü: {e.Message}");
-                        }
-                    }
-                }
-                return _instance;
-            }
-            set
-            {
-                // ÈôÊµÀıÎª¿Õ£¬½«´«ÈëµÄÖµ¸³¸øÊµÀı
-                if (_instance == null)
                 {
-                    _instance = value;
+                            // å¤„ç†ç»„ä»¶æ·»åŠ å¤±è´¥çš„æƒ…å†µ
+                            Debug.LogError($"åˆ›å»ºå®ä¾‹ {typeof(T).Name} å¤±è´¥: {e.Message}");
                 }
             }
         }
-        // ¾²Ì¬ÊµÀı±äÁ¿
+                return _instance;
+    }
+            set
+            {
+                // å¦‚æœå®ä¾‹ä¸ºç©ºï¼Œå°†å€¼èµ‹ç»™å®ä¾‹
+                if (_instance == null)
+                {
+                    _instance = value;
+}
+            }
+        }
+        // é™æ€å®ä¾‹å­—æ®µ
         private static T _instance;
         private void Awake()
         {
-            // ÈôÊµÀıÎª¿Õ£¬½«µ±Ç°¶ÔÏó¸³Öµ¸øÊµÀı
+            // å¦‚æœå®ä¾‹ä¸ºç©ºï¼Œå°†å½“å‰å¯¹è±¡èµ‹å€¼ç»™å®ä¾‹
             if (_instance == null)
             {
                 _instance = this as T;
-                // ±ê¼Ç¸Ã¶ÔÏóÔÚ³¡¾°ÇĞ»»Ê±²»±»Ïú»Ù
+                // æ ‡è®°è¯¥å¯¹è±¡åœ¨åœºæ™¯åŠ è½½æ—¶ä¸é”€æ¯
                 DontDestroyOnLoad(_instance.gameObject);
             }
             else
             {
-                // ÈôÊµÀıÒÑ´æÔÚ£¬Ïú»Ùµ±Ç°¶ÔÏó
+                // å¦‚æœå®ä¾‹å·²å­˜åœ¨ï¼Œé”€æ¯å½“å‰å¯¹è±¡
                 if (this != _instance)
                 {
                     Destroy(gameObject);
-                    Debug.Log("É¾ÁË");
+                    Debug.Log("åˆ é™¤");
                 }
             }
         }
