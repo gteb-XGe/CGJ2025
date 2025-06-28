@@ -12,12 +12,12 @@ public interface IAttachable
     void OnDetach();
 }
 
-public class CRT_trigger : MonoBehaviour,IAttachable
+public class CRT_trigger : MonoBehaviour, IAttachable
 {
     public Text CRT_Text; //CRT初始交互提示文本
     [Header("教程UI")]
     public Text _教程引导;//透明度初始为0
-    [SerializeField]private float FadeTime=1.0f;
+    [SerializeField] private float FadeTime = 1.0f;
 
     [Header("交互参数")]
     [SerializeField] private float triggerTime = 3.0f; // 触发时间阈值
@@ -27,10 +27,16 @@ public class CRT_trigger : MonoBehaviour,IAttachable
     [SerializeField] private GameObject LightningEffectPrefab; //闪电特效Prefab
 
     [Header("场景切换参数")]
-    // 光圈收缩动画时长，可根据需求调整
-    [SerializeField] float fadeOutDuration =3f;
-    // 场景切换延迟，可用于配合动画
+    [SerializeField] float fadeOutDuration = 3f;
     [SerializeField] float switchDelay = 0.5f;
+    [SerializeField] private float fadeInDuration = 2f;
+    Image img;
+
+    [Header("镜头抖动参数")]
+    [SerializeField] private float shakeDuration = 0.3f;
+    [SerializeField] private float shakeStrength = 0.5f;
+    [SerializeField] private int shakeVibrato = 10;
+    [SerializeField] private float shakeRandomness = 90f;
 
     public void OnAttach()
     {
@@ -50,11 +56,12 @@ public class CRT_trigger : MonoBehaviour,IAttachable
     private void Awake()
     {
         timer = triggerTime;
+        img.GetComponent<Image>();
     }
 
     void Start()
     {
-        
+
     }
 
     void Update()
@@ -67,7 +74,6 @@ public class CRT_trigger : MonoBehaviour,IAttachable
                 TriggerLight();
             }
         }
-
     }
 
     private void TriggerLight()//未点后的闪电
@@ -75,12 +81,12 @@ public class CRT_trigger : MonoBehaviour,IAttachable
         isMouse = true;
         StartCoroutine(CRTFlashEffect());
         _教程引导Text();
-        // 实例化闪电特效
+        CameraShake();
         if (LightningEffectPrefab != null)
         {
             Instantiate(LightningEffectPrefab, transform.position, Quaternion.identity);
         }
-        Destroy(LightningEffectPrefab,0.3f);
+        Destroy(LightningEffectPrefab, 0.3f);
     }
 
     private void OnMouseDown()//鼠标点击事件
@@ -92,11 +98,10 @@ public class CRT_trigger : MonoBehaviour,IAttachable
 
     IEnumerator CRTFlashEffect()// 触发CRT闪烁效果,进入游戏时触发
     {
-        // CRT闪烁效果
         Material mat = GetComponent<MeshRenderer>().material;
         Color originalColor = mat.color;
 
-        for (int i = 0; i <FlashNum; i++)
+        for (int i = 0; i < FlashNum; i++)
         {
             mat.color = Color.white;
             yield return new WaitForSeconds(0.1f);
@@ -120,20 +125,20 @@ public class CRT_trigger : MonoBehaviour,IAttachable
 
     public void SwitchToNewScene()
     {
-        // 禁用玩家控制
-        //隐藏Player?
-
-
-        //屏幕变黑后切换
-        Camera.main.DOColor(Color.black, fadeOutDuration).OnComplete(() =>
-        {
-            // 延迟一段时间后切换场景
-            Invoke("LoadTargetScene", switchDelay);
-        });
-
+        var r = DOTween.Sequence();
+        CameraShake();
+        r.Append(img.DOFade(1, fadeInDuration));
+        r.AppendInterval(switchDelay);
+        r.OnComplete(() => Invoke(nameof(S2), switchDelay));
         Camera newCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
-
-        S2();
     }
 
+    private void CameraShake()
+    {
+        Camera mainCam = Camera.main;
+        if (mainCam != null)
+        {
+            mainCam.transform.DOShakePosition(shakeDuration, shakeStrength, shakeVibrato, shakeRandomness);
+        }
+    }
 }
