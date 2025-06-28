@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
-public class TestEventt : MonoBehaviour, BaseEvent
-{
+public class PushEventUp :  MonoBehaviour ,BaseEvent
+    //推动效果：空调，风扇
+{  
     public GameObject targetObject;  // 被吹风的对象
     public float maxForce = 5f;     // 最近距离时的最大风力
     public float maxDistance = 5f;  // 风扇的最大作用距离
@@ -13,16 +15,16 @@ public class TestEventt : MonoBehaviour, BaseEvent
         targetObject = player;
         isFanActive = !isFanActive;
         Debug.Log("111");
-
+      
     }
     public void EndEvent(GameObject player)
     {
-
+        
     }
     private void FixedUpdate()
     {
-
-
+     
+       
 
         if (isFanActive && targetObject != null)
         {
@@ -39,7 +41,8 @@ public class TestEventt : MonoBehaviour, BaseEvent
         float forceMag = Mathf.Lerp(maxForce, 0, distance / maxDistance);
 
         // 施加向上的力
-        rb.AddForce(new Vector2(forceMag, 0));
+        rb.AddForce(new Vector2(0, forceMag));
     }
 
+  
 }

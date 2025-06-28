@@ -1,0 +1,85 @@
+[33mcommit 5e7c39db3e200829ab99d69d4a03436ebef05951[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m
+Author: gr1se0 <18868811485@163.com>
+Date:   Sat Jun 28 14:47:14 2025 +0800
+
+    优化
+
+[33mcommit 0795cd455a26045c2267c6523c93b63623a124cc[m
+Author: gr1se0 <18868811485@163.com>
+Date:   Sat Jun 28 13:41:09 2025 +0800
+
+    场景切换代码，参数细节需优化
+
+[33mcommit 178840423d9f970e6b8ce6585a270025fd322beb[m
+Author: gr1se0 <18868811485@163.com>
+Date:   Sat Jun 28 13:07:01 2025 +0800
+
+    S1S2-场景1，2
+
+[33mcommit 09c4af9f7e89b7eb28fee5b760b2322efd5bd3e2[m
+Author: gr1se0 <18868811485@163.com>
+Date:   Sat Jun 28 12:11:42 2025 +0800
+
+    移动音频文件位置
+
+[33mcommit e37dfa2e5a8e6b6487fba91b339dd6d2c6750caa[m
+Merge: 9d597b2 819a9e0
+Author: gr1se0 <18868811485@163.com>
+Date:   Sat Jun 28 11:41:17 2025 +0800
+
+    Merge branch 'main' of https://github.com/gteb-XGe/CGJ2025
+
+[33mcommit 9d597b221f42eb9fee3bfe8d386b6f356b9ba78d[m
+Merge: f1742da 9280d2c
+Author: gr1se0 <18868811485@163.com>
+Date:   Sat Jun 28 11:38:52 2025 +0800
+
+    Merge branch 'main' of https://github.com/gteb-XGe/CGJ2025
+
+[33mcommit f1742da9c2b9071d2cb59896dbff0c88fcd3a8e6[m
+Author: gr1se0 <18868811485@163.com>
+Date:   Sat Jun 28 11:38:44 2025 +0800
+
+    CRT
+
+[33mcommit 819a9e0ce9ac123a5fc076fb3a96085a350e12c2[m
+Author: aqUAUb <245320737@qq.com>
+Date:   Sat Jun 28 11:28:20 2025 +0800
+
+    上传了音效素材
+
+[33mcommit 9280d2cf6d872337a9cdcfe9c4d9be5d42913142[m
+Author: gteb-XGe <1252283998@qq.com>
+Date:   Sat Jun 28 09:59:36 2025 +0800
+
+    附身触发基础
+
+[33mcommit 8aae21449f9d6041ffc2995cbb4bb610e2bab8ac[m
+Author: aqUAUb <245320737@qq.com>
+Date:   Sat Jun 28 10:02:03 2025 +0800
+
+    Update .gitignore
+
+[33mcommit cecce33eb873f1c21066b9800e210c850e613250[m
+Author: aqUAUb <245320737@qq.com>
+Date:   Sat Jun 28 09:49:13 2025 +0800
+
+    Update .gitignore
+
+[33mcommit cabd2aa8576eca2cc61040bd8a17502d2676b291[m
+Author: gr1se0 <18868811485@163.com>
+Date:   Sat Jun 28 09:26:23 2025 +0800
+
+    CRT-Trigger
+
+[33mcommit e2b7b9fe36674a08e4fa3d94f56de308bdd22072[m
+Author: gr1se0 <18868811485@163.com>
+Date:   Sat Jun 28 07:23:03 2025 +0800
+
+    音频单例
+
+[33mcommit b75cb705b6f66d99718ed29d60b923f580c16690[m
+Author: zhw <1252283998@qq.com>
+Date:   Sat Jun 28 06:02:00 2025 +0800
+
+    提交测试

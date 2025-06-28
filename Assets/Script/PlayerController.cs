@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour
         {
             if (target != null)
             {
-                target.GetComponent<BaseEvent>().StartEvent();
+                target.GetComponent<BaseEvent>().StartEvent(gameObject);
             }
         }
         // 移动脚本（移动方式暂定，这里先用上下左右移动）
