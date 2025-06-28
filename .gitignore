@@ -102,3 +102,5 @@ InitTestScene*.unity*
 Packages/manifest.json
 Packages/packages-lock.json
 ProjectSettings/ProjectVersion.txt
+/Assets
+Assets/Scenes/First Scene.unity

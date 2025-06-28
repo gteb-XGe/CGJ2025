@@ -7,12 +7,14 @@ public class TestEventt : MonoBehaviour, BaseEvent
     public GameObject targetObject;  // 被吹风的对象
     public float maxForce = 5f;     // 最近距离时的最大风力
     public float maxDistance = 5f;  // 风扇的最大作用距离
-    private bool isFanActive = false; // 风扇开关状态
+    private bool isFanActive = false; //开关状态
     public void StartEvent(GameObject player)
     {
         targetObject = player;
         isFanActive = !isFanActive;
-        Debug.Log("111");
+       // Debug.Log("111");
+       if(isFanActive) MusicManager.Instance.PlaySFX("Audio/Level1/Level_01_Amb_AirConditioner");
+
 
     }
     public void EndEvent(GameObject player)

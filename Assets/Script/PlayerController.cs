@@ -5,19 +5,38 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+
+    private LineRenderer lineRenderer;  // 在编辑器中链接LineRenderer组件
     [SerializeField] GameObject target;
     [SerializeField] float gettingTime = 1f;
     [SerializeField] float moveSpeed = 3f;
+    private GameObject lastTarget;//记录最后一个附身位置
     private Rigidbody2D rb;
     private Vector3 startPosition;
     private Vector3 targetPosition;
-    public bool isProcessing;
+    public bool isProcessing=false;
     [SerializeField]float elapsedTime = 0.3f;
   //  private bool isMoving = true;
     private Coroutine moveCoroutine;
     void Start()
     {
+        if (lineRenderer == null)
+        {
+            GameObject lineObj = new GameObject("Line");
+            lineRenderer = lineObj.AddComponent<LineRenderer>();
+            // 设置线的参数
+            lineRenderer.positionCount = 2;
+            lineRenderer.material = new Material(Shader.Find("Sprites/Default")); // 简单材质
+            lineRenderer.widthMultiplier = 0.05f; // 线宽
+            lineRenderer.startColor = Color.white;
+            lineRenderer.endColor = Color.white;
+            lineRenderer.useWorldSpace = true; // 使用世界坐标
+        }
+
+        // 其他初始化
+    
         rb = GetComponent<Rigidbody2D>();
+        //GetIn();
     }
 
     void Update()
@@ -46,7 +65,10 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            transform.position=target.transform.position;
+            if (target != null)
+            {
+                transform.position = target.transform.position;
+            }
         }
     }
 
@@ -96,6 +118,14 @@ public class PlayerController : MonoBehaviour
         target=collision.gameObject;
    
     }
-
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        lastTarget = collision.gameObject;
+    }
+    public void Reback()//回到上一个物品
+    {   
+       target=lastTarget;
+        GetIn();
+    }
   
 }
