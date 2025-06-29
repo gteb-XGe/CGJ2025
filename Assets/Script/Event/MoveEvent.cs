@@ -6,7 +6,7 @@ public class MoveEvent : MonoBehaviour,BaseEvent
 {
     [SerializeField]Transform target, current;//目标位置，初始位置
     [SerializeField] float duration=1f;
-    private const string ChairMoveSound = "Audio/Level1/Level_01_ChairMove";
+    private const string MoveSound = "Audio/Level1/Level_01_ChairMove";
     private bool isMoving = false; //防止协程重复执行
     public void EndEvent(GameObject player)
     {
@@ -20,10 +20,10 @@ public class MoveEvent : MonoBehaviour,BaseEvent
         StartCoroutine(MoveToTarget(player));
     }
 
-    private IEnumerator MoveToTarget(GameObject player)
+    protected IEnumerator MoveToTarget(GameObject player)
     {
         isMoving = true;
-        MusicManager.Instance.PlaySFX(ChairMoveSound);
+        MusicManager.Instance.PlaySFX(MoveSound);
 
         float elapsed = 0f;
 

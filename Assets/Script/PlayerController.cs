@@ -41,14 +41,14 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F)&&target!=null)//触发附身方法
+        if (Input.GetKeyDown(KeyCode.Space) &&target!=null)//触发附身方法
         {if (!isProcessing) { GetIn(); } else
             {
                 GetOut();
             }
            
         }
-        if (Input.GetKeyDown(KeyCode.Space))//触发物品事件
+        if (Input.GetMouseButtonDown(0))//触发物品事件
         {
             if (target != null)
             {
@@ -115,7 +115,10 @@ public class PlayerController : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)//附身物体
     {
-        target=collision.gameObject;
+        if (!isProcessing)
+        {
+            target = collision.gameObject;
+        }
    
     }
     private void OnTriggerExit2D(Collider2D collision)
