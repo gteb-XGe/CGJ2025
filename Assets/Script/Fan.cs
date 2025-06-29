@@ -16,8 +16,12 @@ public class Fan : CommonPossessable, IPossessable
 
     void SetStrength()
     {
+        if (!transform.Find("Player"))
+        {
+            return;
+        }
         strength = strength == 0 ? 1 : 0;
-        wind.SetActive(strength == 0 ? true : false);
+        wind.SetActive(strength == 1 ? true : false);
     }
 
     public new void Unpossess()
