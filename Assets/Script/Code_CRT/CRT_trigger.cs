@@ -69,12 +69,12 @@ public class CRT_trigger : MonoBehaviour, IAttachable
             timer -= Time.deltaTime;
             if (timer < 0)
             {
-                TriggerLight();
+                //TriggerLight();
             }
         }
     }
 
-    private void TriggerLight()//未点后的闪电
+    /*private void TriggerLight()//未点后的闪电
     {
         isMouse = true;
         StartCoroutine(CRTFlashEffect());
@@ -85,17 +85,17 @@ public class CRT_trigger : MonoBehaviour, IAttachable
             Instantiate(LightningEffectPrefab, transform.position, Quaternion.identity);
         }
         Destroy(LightningEffectPrefab, 0.3f);
-    }
+    }*/
 
     private void OnMouseDown()//鼠标点击事件
     {
         SwitchToNewScene("First Scene");
         isMouse = true;
-        StartCoroutine(CRTFlashEffect());
-        _教程引导Text();
+        //StartCoroutine(CRTFlashEffect());
+        //_教程引导Text();
     }
 
-    IEnumerator CRTFlashEffect()// 触发CRT闪烁效果,进入游戏时触发
+    /*IEnumerator CRTFlashEffect()// 触发CRT闪烁效果,进入游戏时触发
     {
         Material mat = GetComponent<MeshRenderer>().material;
         Color originalColor = mat.color;
@@ -107,7 +107,7 @@ public class CRT_trigger : MonoBehaviour, IAttachable
             mat.color = originalColor;
             yield return new WaitForSeconds(0.1f);
         }
-    }
+    }*/
 
     public void _教程引导Text()
     {
