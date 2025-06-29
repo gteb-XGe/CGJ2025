@@ -1,46 +1,29 @@
-using System.Collections;
 using UnityEngine;
+using System.Collections;
 
 public class RotateEvent : MonoBehaviour, BaseEvent
 {
-    [SerializeField] Quaternion start, end;
-    [SerializeField] float duration = 2f;  // 旋转时间
-    [SerializeField] Transform holder;
-    private bool isClosing = true;
-    private bool isRotating = false;
+    [SerializeField] float duration = 2f;  // 延迟时间（模拟窗户开/关过程）
+    [SerializeField] Transform holder;     // 仍可保留，备用
+    [SerializeField] GameObject Open, Close;
+
+    [SerializeField] bool IsOpening = true;
+    private bool isWaiting = false;
+
     private const string RainInside = "Audio/Level1/Level_01_Amb_Rain_Inside";
     private const string RainOutside = "Audio/Level1/Level_01_Amb_Rain_Outside";
     private const string WindowOpenSound = "Audio/Level1/Level_01_WindowOpen";
+
     private void Start()
     {
-        holder.rotation = start;
-
         // 播放室内雨声（低音量，循环）
         MusicManager.Instance.PlayAudio("RainInside", RainInside, volume: 0.3f, loop: true);
     }
 
     public void StartEvent(GameObject player)
     {
-        if (isRotating) return;
-        MusicManager.Instance.PlaySFX(WindowOpenSound);
-        // 切换窗户状态
-        if (isClosing)
-        {
-            // 窗户关闭：关闭外雨声，恢复室内雨声
-            MusicManager.Instance.StopAudio("RainOutside");
-            MusicManager.Instance.SetAudioVolume("RainInside", 0.3f);
-        }
-        else
-        {
-            // 窗户打开：播放外雨声，减弱室内雨声
-            MusicManager.Instance.PlayAudio("RainOutside", RainOutside, volume: 0.6f, loop: true);
-            MusicManager.Instance.SetAudioVolume("RainInside", 0.1f);
-        }
-
-        // 开始旋转动画
-        StartCoroutine(RotateOverTime(holder, isClosing ? start : end, isClosing ? end : start, duration));
-
-        isClosing = !isClosing;
+        if (isWaiting) return;
+        StartCoroutine(HandleWindowEvent());
     }
 
     public void EndEvent(GameObject player)
@@ -48,20 +31,39 @@ public class RotateEvent : MonoBehaviour, BaseEvent
         // 可扩展
     }
 
-    private IEnumerator RotateOverTime(Transform targetTransform, Quaternion fromRot, Quaternion toRot, float time)
+    private IEnumerator HandleWindowEvent()
     {
-        isRotating = true;
+        isWaiting = true;
 
-        float elapsed = 0f;
-        while (elapsed < time)
+        // 播放窗户开启声音
+        MusicManager.Instance.PlaySFX(WindowOpenSound);
+
+        // 等待 duration 秒（代替原来的旋转）
+        yield return new WaitForSeconds(duration);
+
+        if (IsOpening)
         {
-            float t = elapsed / time;
-            targetTransform.rotation = Quaternion.Slerp(fromRot, toRot, t);
-            elapsed += Time.deltaTime;
-            yield return null;
-        }
-        targetTransform.rotation = toRot;
+            // 关闭窗户：关闭外雨声，恢复内雨声
+            MusicManager.Instance.StopAudio("RainOutside");
+            MusicManager.Instance.SetAudioVolume("RainInside", 0.3f);
 
-        isRotating = false;
+            // 显示关闭状态，隐藏打开状态
+            Open.SetActive(false);
+            Close.SetActive(true);
+        }
+        else
+        {
+            // 打开窗户：播放外雨声，降低内雨声
+            MusicManager.Instance.PlayAudio("RainOutside", RainOutside, volume: 0.6f, loop: true);
+            MusicManager.Instance.SetAudioVolume("RainInside", 0.1f);
+
+            // 显示打开状态，隐藏关闭状态
+            Open.SetActive(true );
+            Close.SetActive(false);
+        }
+
+        // 状态切换
+        IsOpening = !IsOpening;
+        isWaiting = false;
     }
 }
