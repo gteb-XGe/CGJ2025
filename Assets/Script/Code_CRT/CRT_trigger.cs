@@ -15,9 +15,8 @@ public interface IAttachable
 public class CRT_trigger : MonoBehaviour, IAttachable
 {
     public Text CRT_Text; //CRT初始交互提示文本
-    [Header("教程UI")]
-    public Text _教程引导;//透明度初始为0
-    [SerializeField] private float FadeTime = 1.0f;
+    public static bool __isOver;
+    public GameObject player;
 
     [Header("交互参数")]
     [SerializeField] private float triggerTime = 3.0f; // 触发时间阈值
@@ -64,12 +63,13 @@ public class CRT_trigger : MonoBehaviour, IAttachable
 
     void Update()
     {
-        if (!isMouse)
+        if(__isOver)
         {
-            timer -= Time.deltaTime;
-            if (timer < 0)
+            if(Input.GetKeyDown(KeyCode.Mouse0))
             {
-                //TriggerLight();
+                var a=player.transform.GetComponent<Rigidbody2D>();
+                a.DOMove(new Vector2(0,-0.5f),2f);
+                SwitchToNewScene("First Scene");
             }
         }
     }
@@ -89,7 +89,8 @@ public class CRT_trigger : MonoBehaviour, IAttachable
 
     private void OnMouseDown()//鼠标点击事件
     {
-        SwitchToNewScene("First Scene");
+        //TextUIManager.Instance.SetTextFade("左键：附着并拖动  \r\n空格：松手让灵魂飞  \r\n右键：在钟表上回溯",3f);
+        //SwitchToNewScene("First Scene");
         isMouse = true;
         //StartCoroutine(CRTFlashEffect());
         //_教程引导Text();
@@ -109,13 +110,6 @@ public class CRT_trigger : MonoBehaviour, IAttachable
         }
     }*/
 
-    public void _教程引导Text()
-    {
-        var r = DOTween.Sequence();
-        r.Append(_教程引导.DOFade(1, FadeTime));
-        r.Append(_教程引导.DOFade(0, FadeTime * 2));//淡入淡出效果
-        r.OnComplete(() => Destroy(_教程引导.gameObject));
-    }
 
 
     public void SwitchToNewScene(string name)
