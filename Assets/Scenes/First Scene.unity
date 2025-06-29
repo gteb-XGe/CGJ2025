@@ -432,9 +432,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.01430124, y: 0.044596314}
+  m_Offset: {x: 0.26311827, y: 0.044596314}
   serializedVersion: 2
-  m_Radius: 0.5440379
+  m_Radius: 0.538383
 --- !u!114 &152265926
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1113,9 +1113,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.005005215, y: -0.020321779}
+  m_Offset: {x: 0.033113703, y: -0.020321779}
   serializedVersion: 2
-  m_Radius: 0.5429169
+  m_Radius: 0.90832514
 --- !u!114 &397169512
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1329,6 +1329,7 @@ MonoBehaviour:
   fallHeight: 1.2
   horizontalOffset: 0.5
   duration: 1
+  fnished: 1
 --- !u!212 &644555239
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2483,7 +2484,7 @@ Transform:
   m_GameObject: {fileID: 844022463}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.74, y: 1.32, z: 0}
+  m_LocalPosition: {x: -5.33, y: -0.32, z: 0}
   m_LocalScale: {x: 0.59, y: 0.59, z: 0.59}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -3014,6 +3015,7 @@ MonoBehaviour:
   fallHeight: 2.2
   horizontalOffset: 0.5
   duration: 1
+  fnished: 1
 --- !u!212 &992279519
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3651,6 +3653,7 @@ MonoBehaviour:
   fallHeight: 1.2
   horizontalOffset: 0.5
   duration: 1
+  fnished: 0
 --- !u!1 &1285611304
 GameObject:
   m_ObjectHideFlags: 0
@@ -3741,8 +3744,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a15779774e8160f488966cb07dbff870, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fnished: 0
   targetObject: {fileID: 0}
-  maxForce: 22
+  maxForce: 3
   maxDistance: 5
 --- !u!1 &1302884208
 GameObject:
@@ -5219,8 +5223,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -2087446737
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: ef0d61a03c264a8468ea14e4f7a41c99, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -5377,7 +5381,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2126643570}
   - component: {fileID: 2126643569}
-  - component: {fileID: 2126643568}
+  - component: {fileID: 2126643571}
   - component: {fileID: 2126643567}
   m_Layer: 0
   m_Name: Square
@@ -5418,7 +5422,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 1.6885729, y: 0.08996871}
+  m_Offset: {x: 0.15513182, y: -0.27433422}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -5429,25 +5433,8 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 4.3831654, y: 0.4779526}
+  m_Size: {x: 2.1554337, y: 0.7332718}
   m_EdgeRadius: 0
---- !u!114 &2126643568
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2126643566}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2cc1a2ff61a8654459065765fd8de2ae, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  duration: 2
-  holder: {fileID: 1914135757}
-  Open: {fileID: 332674016}
-  Close: {fileID: 791822193}
-  IsOpening: 0
 --- !u!212 &2126643569
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5509,12 +5496,32 @@ Transform:
   m_GameObject: {fileID: 2126643566}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.31, y: 0.46, z: 1.71}
+  m_LocalPosition: {x: 1.45, y: 0.96, z: 1.21}
   m_LocalScale: {x: 3, y: 3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1914135757}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2126643571
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2126643566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6f44937fa378da41803eee95d961d1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetObject: {fileID: 0}
+  maxForce: 9
+  maxDistance: 2
+  duration: 2
+  holder: {fileID: 0}
+  Open: {fileID: 791822193}
+  Close: {fileID: 332674016}
+  IsOpening: 1
 --- !u!1 &2132904942
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,6 +7,7 @@ public class SwingEvent1 : MonoBehaviour, BaseEvent
 {  [SerializeField] Transform startPoint, endPoint;
     [SerializeField] Swing swing;
     public float speed = 5f;
+    private bool fnished=false;
     private void Start()
     {
 
@@ -15,6 +16,11 @@ public class SwingEvent1 : MonoBehaviour, BaseEvent
     {
         //改变可转动范围
         swing.maxAngle=90f-swing.maxAngle;
+        if (!fnished)
+        {
+            StageLoop.instance.finish();
+            fnished = true;
+        }
     }
 
     public void EndEvent(GameObject player)

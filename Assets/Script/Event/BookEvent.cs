@@ -9,7 +9,7 @@ public class BookEvent : MonoBehaviour, BaseEvent
     [SerializeField] private float duration = 1f;     // ¶¯»­Ê±³¤
 
     private bool hasFallen = false;
-
+    public  bool fnished=false;
     private readonly string[] bookSounds = {
         "Audio/Level1/Level_01_Book_01",
         "Audio/Level1/Level_01_Book_02"
@@ -17,6 +17,11 @@ public class BookEvent : MonoBehaviour, BaseEvent
 
     public void StartEvent(GameObject player)
     {
+        if (!fnished)
+        {
+            StageLoop.instance.finish();
+            fnished = true;
+        }
         if (hasFallen) return;
         hasFallen = true;
 

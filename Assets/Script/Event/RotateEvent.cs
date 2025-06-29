@@ -9,7 +9,7 @@ public class RotateEvent : MonoBehaviour, BaseEvent
 
     [SerializeField] bool IsOpening = true;
     private bool isWaiting = false;
-
+    private bool fnished=false;
     private const string RainInside = "Audio/Level1/Level_01_Amb_Rain_Inside";
     private const string RainOutside = "Audio/Level1/Level_01_Amb_Rain_Outside";
     private const string WindowOpenSound = "Audio/Level1/Level_01_WindowOpen";
@@ -22,6 +22,11 @@ public class RotateEvent : MonoBehaviour, BaseEvent
 
     public void StartEvent(GameObject player)
     {
+        if (!fnished)
+        {
+            StageLoop.instance.finish();
+            fnished = true;
+        }
         if (isWaiting) return;
         StartCoroutine(HandleWindowEvent());
     }

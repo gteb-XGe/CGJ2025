@@ -48,7 +48,7 @@ public class PlayerController : MonoBehaviour
             }
            
         }
-        if (Input.GetMouseButtonDown(0))//触发物品事件
+        if (Input.GetMouseButtonDown(0)&&isProcessing)//触发物品事件
         {
             if (target != null)
             {
@@ -76,7 +76,8 @@ public class PlayerController : MonoBehaviour
     void GetIn()    //附身
         
     {
-        isProcessing = true;
+       
+        
         rb.velocity = Vector2.zero;
         rb.isKinematic = true;
         if (target != null)
@@ -91,6 +92,8 @@ public class PlayerController : MonoBehaviour
             }
             // 启动移动协程
             moveCoroutine = StartCoroutine(MoveToTargetCoroutine());
+            isProcessing = true;
+            lastTarget = target;
         }
     }
     void GetOut()
@@ -122,8 +125,9 @@ public class PlayerController : MonoBehaviour
    
     }
     private void OnTriggerExit2D(Collider2D collision)
-    {
-        lastTarget = collision.gameObject;
+    {if (!isProcessing) { target = null; }
+        //lastTarget = collision.gameObject;
+       
     }
     public void Reback()//回到上一个物品
     {   

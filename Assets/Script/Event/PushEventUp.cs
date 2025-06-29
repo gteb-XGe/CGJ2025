@@ -5,7 +5,7 @@ using UnityEngine.UIElements;
 
 public class PushEventUp :  MonoBehaviour ,BaseEvent
     //推动效果：空调，风扇
-{  
+{  private bool fnished=false;
     public GameObject targetObject;  // 被吹风的对象
     public float maxForce = 5f;     // 最近距离时的最大风力
     public float maxDistance = 5f;  // 风扇的最大作用距离
@@ -15,6 +15,11 @@ public class PushEventUp :  MonoBehaviour ,BaseEvent
     {
         targetObject = player;
         isFanActive = !isFanActive;
+        if (!fnished)
+        {
+            StageLoop.instance.finish();
+            fnished = true;
+        }
         if (isFanActive)
         {
         

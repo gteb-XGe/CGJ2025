@@ -3,13 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class TestEventt : MonoBehaviour, BaseEvent
-{
+{   public bool fnished=false;
     public GameObject targetObject;  // 被吹风的对象
     public float maxForce = 5f;     // 最近距离时的最大风力
     public float maxDistance = 5f;  // 风扇的最大作用距离
     private bool isFanActive = false; //开关状态
     public void StartEvent(GameObject player)
     {
+        if (!fnished)
+        {
+            StageLoop.instance.finish();
+            fnished = true;
+        }
         targetObject = player;
         isFanActive = !isFanActive;
        // Debug.Log("111");
