@@ -89,7 +89,8 @@ public class CRT_trigger : MonoBehaviour, IAttachable
 
     private void OnMouseDown()//鼠标点击事件
     {
-        SwitchToNewScene("First Scene");
+        TextUIManager.Instance.SetTextFade("左键：附着并拖动  \r\n空格：松手让灵魂飞  \r\n右键：在钟表上回溯",1.5f);
+        //SwitchToNewScene("First Scene");
         isMouse = true;
         //StartCoroutine(CRTFlashEffect());
         //_教程引导Text();
