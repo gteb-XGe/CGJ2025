@@ -450,7 +450,7 @@ MonoBehaviour:
   target: {fileID: 678928336}
   current: {fileID: 723998726}
   duration: 1
-  Animator: {fileID: 0}
+  animator: {fileID: 0}
 --- !u!95 &152265927
 Animator:
   serializedVersion: 5
@@ -5170,7 +5170,7 @@ Animator:
   m_GameObject: {fileID: 2073969095}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: dec3ef3fcf4df294ab0512f4887384ad, type: 2}
+  m_Controller: {fileID: 9100000, guid: ef85439d6afbb334ab2c87f970056f6e, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
